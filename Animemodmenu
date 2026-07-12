@@ -1,0 +1,84 @@
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "ScriptSelector"
+gui.ResetOnSpawn = false
+gui.Parent = CoreGui
+
+local frame = Instance.new("Frame")
+frame.Parent = gui
+frame.Size = UDim2.new(0, 330, 0, 210)
+frame.Position = UDim2.new(0.5, -165, 0.5, -105)
+frame.BackgroundColor3 = Color3.fromRGB(20, 40, 90)
+frame.BorderSizePixel = 0
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 16)
+
+local stroke = Instance.new("UIStroke")
+stroke.Parent = frame
+stroke.Color = Color3.fromRGB(0,170,255)
+stroke.Thickness = 2
+
+local title = Instance.new("TextLabel")
+title.Parent = frame
+title.Size = UDim2.new(1,0,0,50)
+title.BackgroundTransparency = 1
+title.Text = "🌊 Escolha a Versão"
+title.Font = Enum.Font.GothamBold
+title.TextScaled = true
+title.TextColor3 = Color3.fromRGB(255,255,255)
+
+local subtitle = Instance.new("TextLabel")
+subtitle.Parent = frame
+subtitle.Size = UDim2.new(1,-20,0,20)
+subtitle.Position = UDim2.new(0,10,0,45)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "Selecione a versão desejada"
+subtitle.Font = Enum.Font.Gotham
+subtitle.TextSize = 14
+subtitle.TextColor3 = Color3.fromRGB(180,220,255)
+
+local function CreateButton(text,posY)
+	local b = Instance.new("TextButton")
+	b.Parent = frame
+	b.Size = UDim2.new(0.85,0,0,45)
+	b.Position = UDim2.new(0.075,0,0,posY)
+	b.BackgroundColor3 = Color3.fromRGB(0,140,255)
+	b.Text = text
+	b.TextColor3 = Color3.new(1,1,1)
+	b.Font = Enum.Font.GothamBold
+	b.TextSize = 18
+
+	local c = Instance.new("UICorner")
+	c.CornerRadius = UDim.new(0,12)
+	c.Parent = b
+
+	b.MouseEnter:Connect(function()
+		TweenService:Create(b,TweenInfo.new(0.15),{
+			BackgroundColor3 = Color3.fromRGB(0,180,255)
+		}):Play()
+	end)
+
+	b.MouseLeave:Connect(function()
+		TweenService:Create(b,TweenInfo.new(0.15),{
+			BackgroundColor3 = Color3.fromRGB(0,140,255)
+		}):Play()
+	end)
+
+	return b
+end
+
+local v1 = CreateButton("🔹 Versão V1",85)
+local v2 = CreateButton("🔷 Versão V2",140)
+
+-- V1 executa o script jGvcecA1
+v1.MouseButton1Click:Connect(function()
+	gui:Destroy()
+	loadstring(game:HttpGet("https://pastefy.app/jGvcecA1/raw"))()
+end)
+
+-- V2 executa o script 33JUuDGR
+v2.MouseButton1Click:Connect(function()
+	gui:Destroy()
+	loadstring(game:HttpGet("https://pastefy.app/33JUuDGR/raw"))()
+end)
