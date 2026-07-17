@@ -172,7 +172,7 @@ end)
 
 premiumBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
-    loadstring(game:HttpGet("https://pastebin.com/raw/WcnBLWMA"))()
+    loadstring(game:HttpGet("https://pastefy.app/SCjdMcRW/raw"))()
 end)
 
 discordBtn.MouseButton1Click:Connect(function()
