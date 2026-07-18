@@ -160,14 +160,14 @@ local function CreateButton(text, posY, color, icon)
     return btn
 end
 
--- Botão V1 Redz
+-- Botão V1 Redz (script novo)
 local v1Btn = CreateButton("V1 Redz", 115, Color3.fromRGB(0, 120, 255), "🔹")
 
--- Botão V2 Banana Menu
-local v2Btn = CreateButton("V2 Banana Menu", 175, Color3.fromRGB(100, 0, 255), "🔷")
+-- Botão V2 Banana UI (script que você já tem)
+local v2Btn = CreateButton("V2 Banana UI", 175, Color3.fromRGB(100, 0, 255), "🔷")
 
--- Botão Premium (com dois scripts)
-local premiumBtn = CreateButton("⭐ Premium", 235, Color3.fromRGB(255, 215, 0), "👑")
+-- Botão Premium Redz
+local premiumBtn = CreateButton("⭐ Premium Redz", 235, Color3.fromRGB(255, 215, 0), "👑")
 
 -- Botão Discord
 local discordBtn = CreateButton("💬 Discord", 295, Color3.fromRGB(88, 101, 242), "")
@@ -175,17 +175,7 @@ local discordBtn = CreateButton("💬 Discord", 295, Color3.fromRGB(88, 101, 242
 -- Ações dos botões
 v1Btn.MouseButton1Click:Connect(function()
     gui:Destroy()
-    
-    local success, err = pcall(function()
-        loadstring(game:HttpGet("https://pastefy.app/zqi3daLH/raw"))()
-    end)
-    
-    if not success then
-        warn("Erro ao carregar script zqi3daLH: " .. tostring(err))
-    end
-    
-    task.wait(0.3)
-    loadstring(game:HttpGet("https://pastefy.app/jGvcecA1/raw"))()
+    loadstring(game:HttpGet("https://pastefy.app/U4QAeTvu/raw"))()
 end)
 
 v2Btn.MouseButton1Click:Connect(function()
@@ -193,7 +183,6 @@ v2Btn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastefy.app/33JUuDGR/raw"))()
 end)
 
--- Premium agora executa DOIS scripts
 premiumBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
     
@@ -220,7 +209,7 @@ end)
 
 discordBtn.MouseButton1Click:Connect(function()
     if setclipboard then
-        setclipboard("https://discord.gg/Wk6rS8pZ3") -- Link atualizado
+        setclipboard("https://discord.gg/Wk6rS8pZ3")
         discordBtn.Text = "✅ Copiado!"
         discordBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
         task.wait(2)
