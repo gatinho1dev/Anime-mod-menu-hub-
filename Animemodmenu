@@ -10,8 +10,8 @@ gui.Parent = CoreGui
 -- Frame Principal com fundo personalizado
 local frame = Instance.new("Frame")
 frame.Parent = gui
-frame.Size = UDim2.new(0, 420, 0, 430)
-frame.Position = UDim2.new(0.5, -210, 0.5, -215)
+frame.Size = UDim2.new(0, 420, 0, 340)
+frame.Position = UDim2.new(0.5, -210, 0.5, -170)
 frame.BackgroundColor3 = Color3.fromRGB(15, 15, 35)
 frame.BackgroundTransparency = 0.15
 frame.BorderSizePixel = 0
@@ -160,17 +160,14 @@ local function CreateButton(text, posY, color, icon)
     return btn
 end
 
--- Botão V1 Redz (script novo)
+-- Botão V1 Redz
 local v1Btn = CreateButton("V1 Redz", 115, Color3.fromRGB(0, 120, 255), "🔹")
 
--- Botão V2 Banana UI (script que você já tem)
+-- Botão V2 Banana UI
 local v2Btn = CreateButton("V2 Banana UI", 175, Color3.fromRGB(100, 0, 255), "🔷")
 
--- Botão Premium Redz
-local premiumBtn = CreateButton("⭐ Premium Redz", 235, Color3.fromRGB(255, 215, 0), "👑")
-
 -- Botão Discord
-local discordBtn = CreateButton("💬 Discord", 295, Color3.fromRGB(88, 101, 242), "")
+local discordBtn = CreateButton("💬 Discord", 235, Color3.fromRGB(88, 101, 242), "")
 
 -- Ações dos botões
 v1Btn.MouseButton1Click:Connect(function()
@@ -181,30 +178,6 @@ end)
 v2Btn.MouseButton1Click:Connect(function()
     gui:Destroy()
     loadstring(game:HttpGet("https://pastefy.app/33JUuDGR/raw"))()
-end)
-
-premiumBtn.MouseButton1Click:Connect(function()
-    gui:Destroy()
-    
-    -- Primeiro script
-    local success1, err1 = pcall(function()
-        loadstring(game:HttpGet("https://pastefy.app/kUvgOxuc/raw"))()
-    end)
-    
-    if not success1 then
-        warn("Erro ao carregar script kUvgOxuc: " .. tostring(err1))
-    end
-    
-    task.wait(0.3)
-    
-    -- Segundo script
-    local success2, err2 = pcall(function()
-        loadstring(game:HttpGet("https://pastefy.app/uo3edfFO/raw"))()
-    end)
-    
-    if not success2 then
-        warn("Erro ao carregar script uo3edfFO: " .. tostring(err2))
-    end
 end)
 
 discordBtn.MouseButton1Click:Connect(function()
@@ -223,10 +196,10 @@ discordBtn.MouseButton1Click:Connect(function()
 end)
 
 -- Animação de entrada
-frame.Position = UDim2.new(0.5, -210, 0.5, -230)
+frame.Position = UDim2.new(0.5, -210, 0.5, -185)
 frame.BackgroundTransparency = 1
 
 TweenService:Create(frame, TweenInfo.new(0.6, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-    Position = UDim2.new(0.5, -210, 0.5, -215),
+    Position = UDim2.new(0.5, -210, 0.5, -170),
     BackgroundTransparency = 0.15
 }):Play()
