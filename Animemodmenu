@@ -199,7 +199,7 @@ premiumBtn.MouseButton1Click:Connect(function()
     
     -- Primeiro script
     local success1, err1 = pcall(function()
-        loadstring(game:HttpGet("https://pastefy.app/uo3edfFO/raw"))()
+        loadstring(game:HttpGet("https://pastefy.app/kUvgOxuc/raw"))()
     end)
     
     if not success1 then
