@@ -139,7 +139,7 @@ local v1Btn = CreateButton("Versão V1", 105, Color3.fromRGB(0, 120, 255), "🔹
 -- Botão Versão 2
 local v2Btn = CreateButton("Versão V2", 165, Color3.fromRGB(100, 0, 255), "🔷")
 
--- Botão Premium
+-- Botão Premium (atualizado)
 local premiumBtn = CreateButton("⭐ Premium", 225, Color3.fromRGB(255, 215, 0), "👑")
 
 -- Botão Discord
@@ -170,6 +170,7 @@ v2Btn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastefy.app/33JUuDGR/raw"))()
 end)
 
+-- Premium agora executa o novo script
 premiumBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
     loadstring(game:HttpGet("https://pastefy.app/kUvgOxuc/raw"))()
@@ -177,7 +178,7 @@ end)
 
 discordBtn.MouseButton1Click:Connect(function()
     if setclipboard then
-        setclipboard("https://discord.gg/Xz2dJMGvY")
+        setclipboard("https://discord.gg/Xz2dJMGvY") -- Link atualizado
         discordBtn.Text = "✅ Copiado!"
         discordBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
         task.wait(2)
