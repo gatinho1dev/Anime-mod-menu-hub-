@@ -3,24 +3,49 @@ local CoreGui = game:GetService("CoreGui")
 
 -- Criar GUI Principal
 local gui = Instance.new("ScreenGui")
-gui.Name = "AnimeModVersionSelecter"
+gui.Name = "AnimeModHub"
 gui.ResetOnSpawn = false
 gui.Parent = CoreGui
 
 -- Frame Principal
 local frame = Instance.new("Frame")
 frame.Parent = gui
-frame.Size = UDim2.new(0, 380, 0, 300)
-frame.Position = UDim2.new(0.5, -190, 0.5, -150)
-frame.BackgroundColor3 = Color3.fromRGB(20, 20, 40)
+frame.Size = UDim2.new(0, 380, 0, 320)
+frame.Position = UDim2.new(0.5, -190, 0.5, -160)
+frame.BackgroundColor3 = Color3.fromRGB(15, 15, 35)
 frame.BorderSizePixel = 0
-Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 16)
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 20)
 
--- Borda simples
+-- Brilho (glow)
+local glow = Instance.new("Frame")
+glow.Parent = frame
+glow.Size = UDim2.new(1, 20, 1, 20)
+glow.Position = UDim2.new(0, -10, 0, -10)
+glow.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
+glow.BackgroundTransparency = 0.8
+glow.BorderSizePixel = 0
+Instance.new("UICorner", glow).CornerRadius = UDim.new(0, 25)
+
+-- Borda Gradient
+local borderGradient = Instance.new("Frame")
+borderGradient.Parent = frame
+borderGradient.Size = UDim2.new(1, 0, 1, 0)
+borderGradient.BackgroundTransparency = 1
+borderGradient.BorderSizePixel = 0
+
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 150, 255)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(150, 0, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 150, 255))
+})
+gradient.Parent = borderGradient
+
 local stroke = Instance.new("UIStroke")
 stroke.Parent = frame
 stroke.Color = Color3.fromRGB(0, 150, 255)
 stroke.Thickness = 2
+stroke.Transparency = 0.5
 
 -- Título
 local title = Instance.new("TextLabel")
@@ -28,7 +53,7 @@ title.Parent = frame
 title.Size = UDim2.new(1, 0, 0, 60)
 title.Position = UDim2.new(0, 0, 0, 10)
 title.BackgroundTransparency = 1
-title.Text = "⚡ Anime Mod Selecter"
+title.Text = "⚡ Anime Mod Hub"
 title.Font = Enum.Font.GothamBold
 title.TextScaled = true
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -39,7 +64,7 @@ subtitle.Parent = frame
 subtitle.Size = UDim2.new(1, -40, 0, 25)
 subtitle.Position = UDim2.new(0, 20, 0, 65)
 subtitle.BackgroundTransparency = 1
-subtitle.Text = "Escolha sua versão"
+subtitle.Text = "Selecione uma opção abaixo"
 subtitle.Font = Enum.Font.Gotham
 subtitle.TextSize = 14
 subtitle.TextColor3 = Color3.fromRGB(180, 200, 255)
@@ -48,46 +73,79 @@ subtitle.TextColor3 = Color3.fromRGB(180, 200, 255)
 local function CreateButton(text, posY, color, icon)
     local btn = Instance.new("TextButton")
     btn.Parent = frame
-    btn.Size = UDim2.new(0.85, 0, 0, 45)
+    btn.Size = UDim2.new(0.85, 0, 0, 50)
     btn.Position = UDim2.new(0.075, 0, 0, posY)
-    btn.BackgroundColor3 = color
+    btn.BackgroundColor3 = color or Color3.fromRGB(30, 80, 200)
     btn.Text = icon and icon .. " " .. text or text
     btn.TextColor3 = Color3.new(1, 1, 1)
     btn.Font = Enum.Font.GothamBold
     btn.TextSize = 18
     btn.BorderSizePixel = 0
-    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 10)
+    btn.AutoButtonColor = false
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 12)
+    corner.Parent = btn
+    
+    -- Efeito de brilho no botão
+    local btnGlow = Instance.new("Frame")
+    btnGlow.Parent = btn
+    btnGlow.Size = UDim2.new(1, 0, 1, 0)
+    btnGlow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    btnGlow.BackgroundTransparency = 0.95
+    btnGlow.BorderSizePixel = 0
+    Instance.new("UICorner", btnGlow).CornerRadius = UDim.new(0, 12)
     
     btn.MouseEnter:Connect(function()
-        TweenService:Create(btn, TweenInfo.new(0.15), {
+        TweenService:Create(btn, TweenInfo.new(0.2), {
             BackgroundColor3 = Color3.fromRGB(
-                math.min(color.R * 255 + 50, 255),
-                math.min(color.G * 255 + 50, 255),
-                math.min(color.B * 255 + 50, 255)
+                math.min(color.R * 255 + 60, 255),
+                math.min(color.G * 255 + 60, 255),
+                math.min(color.B * 255 + 60, 255)
             )
         }):Play()
-    end)
-    btn.MouseLeave:Connect(function()
-        TweenService:Create(btn, TweenInfo.new(0.15), {
-            BackgroundColor3 = color
+        TweenService:Create(btn, TweenInfo.new(0.2), {
+            Size = UDim2.new(0.87, 0, 0, 52)
         }):Play()
     end)
+    
+    btn.MouseLeave:Connect(function()
+        TweenService:Create(btn, TweenInfo.new(0.2), {
+            BackgroundColor3 = color
+        }):Play()
+        TweenService:Create(btn, TweenInfo.new(0.2), {
+            Size = UDim2.new(0.85, 0, 0, 50)
+        }):Play()
+    end)
+    
+    btn.MouseButton1Down:Connect(function()
+        TweenService:Create(btn, TweenInfo.new(0.1), {
+            Size = UDim2.new(0.83, 0, 0, 48)
+        }):Play()
+    end)
+    
+    btn.MouseButton1Up:Connect(function()
+        TweenService:Create(btn, TweenInfo.new(0.1), {
+            Size = UDim2.new(0.87, 0, 0, 52)
+        }):Play()
+    end)
+    
     return btn
 end
 
--- Botão V1 Redz
-local v1Btn = CreateButton("V1 Redz", 105, Color3.fromRGB(0, 120, 255), "🔹")
+-- Botão Versão 1
+local v1Btn = CreateButton("Versão V1", 105, Color3.fromRGB(0, 120, 255), "🔹")
 
--- Botão V2 Banana UI
-local v2Btn = CreateButton("V2 Banana UI", 160, Color3.fromRGB(100, 0, 255), "🔷")
+-- Botão Versão 2
+local v2Btn = CreateButton("Versão V2", 165, Color3.fromRGB(100, 0, 255), "🔷")
 
 -- Botão Discord
-local discordBtn = CreateButton("💬 Discord", 215, Color3.fromRGB(88, 101, 242), "")
+local discordBtn = CreateButton("Copiar Discord", 225, Color3.fromRGB(88, 101, 242), "💬")
 
--- Ações
+-- Ações dos botões
 v1Btn.MouseButton1Click:Connect(function()
     gui:Destroy()
-    loadstring(game:HttpGet("https://pastefy.app/U4QAeTvu/raw"))()
+    loadstring(game:HttpGet("https://pastefy.app/jGvcecA1/raw"))()
 end)
 
 v2Btn.MouseButton1Click:Connect(function()
@@ -99,19 +157,22 @@ discordBtn.MouseButton1Click:Connect(function()
     if setclipboard then
         setclipboard("https://discord.gg/Wk6rS8pZ3")
         discordBtn.Text = "✅ Copiado!"
+        discordBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
         task.wait(2)
-        discordBtn.Text = "💬 Discord"
+        discordBtn.Text = "💬 Copiar Discord"
+        discordBtn.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
     else
         discordBtn.Text = "❌ Sem Clipboard"
         task.wait(2)
-        discordBtn.Text = "💬 Discord"
+        discordBtn.Text = "💬 Copiar Discord"
     end
 end)
 
 -- Animação de entrada
-frame.Position = UDim2.new(0.5, -190, 0.5, -170)
+frame.Position = UDim2.new(0.5, -190, 0.5, -200)
 frame.BackgroundTransparency = 1
+
 TweenService:Create(frame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-    Position = UDim2.new(0.5, -190, 0.5, -150),
+    Position = UDim2.new(0.5, -190, 0.5, -160),
     BackgroundTransparency = 0
 }):Play()
