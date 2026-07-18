@@ -3,18 +3,38 @@ local CoreGui = game:GetService("CoreGui")
 
 -- Criar GUI Principal
 local gui = Instance.new("ScreenGui")
-gui.Name = "AnimeModHub"
+gui.Name = "AnimeModVersionSelecter"
 gui.ResetOnSpawn = false
 gui.Parent = CoreGui
 
--- Frame Principal
+-- Frame Principal com fundo personalizado
 local frame = Instance.new("Frame")
 frame.Parent = gui
-frame.Size = UDim2.new(0, 380, 0, 390)
-frame.Position = UDim2.new(0.5, -190, 0.5, -195)
+frame.Size = UDim2.new(0, 420, 0, 430)
+frame.Position = UDim2.new(0.5, -210, 0.5, -215)
 frame.BackgroundColor3 = Color3.fromRGB(15, 15, 35)
+frame.BackgroundTransparency = 0.15
 frame.BorderSizePixel = 0
 Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 20)
+
+-- Fundo com imagem
+local background = Instance.new("ImageLabel")
+background.Parent = frame
+background.Size = UDim2.new(1, 0, 1, 0)
+background.Position = UDim2.new(0, 0, 0, 0)
+background.Image = "rbxassetid://116828114235759"
+background.BackgroundTransparency = 1
+background.ScaleType = Enum.ScaleType.Crop
+Instance.new("UICorner", background).CornerRadius = UDim.new(0, 20)
+
+-- Overlay escuro para melhor visibilidade dos botões
+local overlay = Instance.new("Frame")
+overlay.Parent = frame
+overlay.Size = UDim2.new(1, 0, 1, 0)
+overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+overlay.BackgroundTransparency = 0.5
+overlay.BorderSizePixel = 0
+Instance.new("UICorner", overlay).CornerRadius = UDim.new(0, 20)
 
 -- Brilho (glow)
 local glow = Instance.new("Frame")
@@ -22,7 +42,7 @@ glow.Parent = frame
 glow.Size = UDim2.new(1, 20, 1, 20)
 glow.Position = UDim2.new(0, -10, 0, -10)
 glow.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
-glow.BackgroundTransparency = 0.8
+glow.BackgroundTransparency = 0.7
 glow.BorderSizePixel = 0
 Instance.new("UICorner", glow).CornerRadius = UDim.new(0, 25)
 
@@ -45,29 +65,33 @@ local stroke = Instance.new("UIStroke")
 stroke.Parent = frame
 stroke.Color = Color3.fromRGB(0, 150, 255)
 stroke.Thickness = 2
-stroke.Transparency = 0.5
+stroke.Transparency = 0.3
 
 -- Título
 local title = Instance.new("TextLabel")
 title.Parent = frame
-title.Size = UDim2.new(1, 0, 0, 60)
+title.Size = UDim2.new(1, 0, 0, 70)
 title.Position = UDim2.new(0, 0, 0, 10)
 title.BackgroundTransparency = 1
-title.Text = "⚡ Anime Mod Hub"
+title.Text = "⚡ Anime Mod Version Selecter"
 title.Font = Enum.Font.GothamBold
 title.TextScaled = true
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+title.TextStrokeTransparency = 0.3
 
 -- Subtítulo
 local subtitle = Instance.new("TextLabel")
 subtitle.Parent = frame
 subtitle.Size = UDim2.new(1, -40, 0, 25)
-subtitle.Position = UDim2.new(0, 20, 0, 65)
+subtitle.Position = UDim2.new(0, 20, 0, 75)
 subtitle.BackgroundTransparency = 1
-subtitle.Text = "Selecione uma opção abaixo"
+subtitle.Text = "Selecione uma versão abaixo"
 subtitle.Font = Enum.Font.Gotham
 subtitle.TextSize = 14
-subtitle.TextColor3 = Color3.fromRGB(180, 200, 255)
+subtitle.TextColor3 = Color3.fromRGB(200, 220, 255)
+subtitle.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+subtitle.TextStrokeTransparency = 0.5
 
 -- Função para criar botões
 local function CreateButton(text, posY, color, icon)
@@ -76,6 +100,7 @@ local function CreateButton(text, posY, color, icon)
     btn.Size = UDim2.new(0.85, 0, 0, 50)
     btn.Position = UDim2.new(0.075, 0, 0, posY)
     btn.BackgroundColor3 = color or Color3.fromRGB(30, 80, 200)
+    btn.BackgroundTransparency = 0.15
     btn.Text = icon and icon .. " " .. text or text
     btn.TextColor3 = Color3.new(1, 1, 1)
     btn.Font = Enum.Font.GothamBold
@@ -102,7 +127,8 @@ local function CreateButton(text, posY, color, icon)
                 math.min(color.R * 255 + 60, 255),
                 math.min(color.G * 255 + 60, 255),
                 math.min(color.B * 255 + 60, 255)
-            )
+            ),
+            BackgroundTransparency = 0
         }):Play()
         TweenService:Create(btn, TweenInfo.new(0.2), {
             Size = UDim2.new(0.87, 0, 0, 52)
@@ -111,7 +137,8 @@ local function CreateButton(text, posY, color, icon)
     
     btn.MouseLeave:Connect(function()
         TweenService:Create(btn, TweenInfo.new(0.2), {
-            BackgroundColor3 = color
+            BackgroundColor3 = color,
+            BackgroundTransparency = 0.15
         }):Play()
         TweenService:Create(btn, TweenInfo.new(0.2), {
             Size = UDim2.new(0.85, 0, 0, 50)
@@ -134,22 +161,21 @@ local function CreateButton(text, posY, color, icon)
 end
 
 -- Botão V1 Redz
-local v1Btn = CreateButton("V1 Redz", 105, Color3.fromRGB(0, 120, 255), "🔹")
+local v1Btn = CreateButton("V1 Redz", 115, Color3.fromRGB(0, 120, 255), "🔹")
 
 -- Botão V2 Banana Menu
-local v2Btn = CreateButton("V2 Banana Menu", 165, Color3.fromRGB(100, 0, 255), "🔷")
+local v2Btn = CreateButton("V2 Banana Menu", 175, Color3.fromRGB(100, 0, 255), "🔷")
 
--- Botão Premium
-local premiumBtn = CreateButton("⭐ Premium", 225, Color3.fromRGB(255, 215, 0), "👑")
+-- Botão Premium (com dois scripts)
+local premiumBtn = CreateButton("⭐ Premium", 235, Color3.fromRGB(255, 215, 0), "👑")
 
 -- Botão Discord
-local discordBtn = CreateButton("💬 Discord", 285, Color3.fromRGB(88, 101, 242), "")
+local discordBtn = CreateButton("💬 Discord", 295, Color3.fromRGB(88, 101, 242), "")
 
 -- Ações dos botões
 v1Btn.MouseButton1Click:Connect(function()
     gui:Destroy()
     
-    -- Tentar executar o primeiro script com proteção
     local success, err = pcall(function()
         loadstring(game:HttpGet("https://pastefy.app/zqi3daLH/raw"))()
     end)
@@ -158,10 +184,7 @@ v1Btn.MouseButton1Click:Connect(function()
         warn("Erro ao carregar script zqi3daLH: " .. tostring(err))
     end
     
-    -- Pequeno delay para garantir que o primeiro script carregou
     task.wait(0.3)
-    
-    -- Executar o segundo script
     loadstring(game:HttpGet("https://pastefy.app/jGvcecA1/raw"))()
 end)
 
@@ -170,14 +193,34 @@ v2Btn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastefy.app/33JUuDGR/raw"))()
 end)
 
+-- Premium agora executa DOIS scripts
 premiumBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
-    loadstring(game:HttpGet("https://pastefy.app/kUvgOxuc/raw"))()
+    
+    -- Primeiro script
+    local success1, err1 = pcall(function()
+        loadstring(game:HttpGet("https://pastefy.app/kUvgOxuc/raw"))()
+    end)
+    
+    if not success1 then
+        warn("Erro ao carregar script kUvgOxuc: " .. tostring(err1))
+    end
+    
+    task.wait(0.3)
+    
+    -- Segundo script
+    local success2, err2 = pcall(function()
+        loadstring(game:HttpGet("https://pastefy.app/uo3edfFO/raw"))()
+    end)
+    
+    if not success2 then
+        warn("Erro ao carregar script uo3edfFO: " .. tostring(err2))
+    end
 end)
 
 discordBtn.MouseButton1Click:Connect(function()
     if setclipboard then
-        setclipboard("https://discord.gg/Xz2dJMGvY")
+        setclipboard("https://discord.gg/Wk6rS8pZ3") -- Link atualizado
         discordBtn.Text = "✅ Copiado!"
         discordBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
         task.wait(2)
@@ -191,10 +234,10 @@ discordBtn.MouseButton1Click:Connect(function()
 end)
 
 -- Animação de entrada
-frame.Position = UDim2.new(0.5, -190, 0.5, -200)
+frame.Position = UDim2.new(0.5, -210, 0.5, -230)
 frame.BackgroundTransparency = 1
 
-TweenService:Create(frame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-    Position = UDim2.new(0.5, -190, 0.5, -195),
-    BackgroundTransparency = 0
+TweenService:Create(frame, TweenInfo.new(0.6, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    Position = UDim2.new(0.5, -210, 0.5, -215),
+    BackgroundTransparency = 0.15
 }):Play()
