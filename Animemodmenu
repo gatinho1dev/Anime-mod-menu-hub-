@@ -155,7 +155,7 @@ end)
 
 discordBtn.MouseButton1Click:Connect(function()
     if setclipboard then
-        setclipboard("https://discord.gg/Wk6rS8pZ3")
+        setclipboard("https://discord.gg/VEtNZDXWW")
         discordBtn.Text = "✅ Copiado!"
         discordBtn.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
         task.wait(2)
